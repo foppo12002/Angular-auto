@@ -1,0 +1,14 @@
+<div>
+  <h2>產生上板文件</h2>
+  <div>系統
+    <table>
+      <tr *ngFor="let proj of projects ">
+        <td><input type="checkbox" [checked]="proj.isChecked" ></td>
+        <td>{{proj.appName}}</td>
+      </tr>
+      <tr>
+        <td><input type="button" value="產文件" (click)="getFile()"></td>
+      </tr>
+    </table>
+  </div>
+</div>
