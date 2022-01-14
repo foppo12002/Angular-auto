@@ -1,9 +1,9 @@
-<div>
+<div id="content">
   <h2>產生上板文件</h2>
   <div>系統
     <table>
       <tr *ngFor="let proj of projects ">
-        <td><input type="checkbox" [checked]="proj.isChecked" ></td>
+        <td><input type="checkbox" [(ngModel)]="proj.isChecked"></td>
         <td>{{proj.appName}}</td>
       </tr>
       <tr>
