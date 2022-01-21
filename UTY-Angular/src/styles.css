@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 body{
-  background-image: url("images/cow.jpg");
-  background-size:100%;
+  background-image: url("assets/images/sky.jpg");
+  background-size:100% 100%;
+  background-attachment: fixed;
 }

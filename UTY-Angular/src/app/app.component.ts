@@ -1,19 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
-class Project {
+
+interface ProjInterface {
   appName: string;
+  projName: string;
+}
+
+class Project implements ProjInterface {
+  appName: string;
+  projName: string;
   isChecked: boolean = false;
 
-  constructor(appName: string) {
-    this.appName = appName || "";
+
+  constructor(appName: string = "", projName: string = "") {
+    this.appName = appName;
+    this.projName = projName;
   }
 }
 
 type Projects = Project[];
-type apps = {
-  appList: string[]
-}
+
 
 @Component({
   selector: 'app-root',
@@ -22,19 +29,16 @@ type apps = {
 })
 export class AppComponent implements OnInit {
   private blob: Blob | undefined;
-
   constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
     this.http.get('http://localhost:8777/godJJ/autoinitprojecthandler/searchAppName', {
       responseType: 'json'
-    }).subscribe((value) => {
-      const appLists = (value as apps).appList
-      this.projects = appLists?.map((appname) => {
-        return new Project(appname)
-      }) || [];
-    });
+    }).subscribe(value => {
+      const projs = value as ProjInterface[]
+      this.projects = projs.map(proj => new Project(proj.appName, proj.projName))
+    })
   }
 
 
